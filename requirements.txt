@@ -4,7 +4,6 @@ pandas
 numpy
 pyarrow          # parquet read/write
 openpyxl         # read the NLDC .xlsx files
-requests         # weather API calls
 
 # Models
 scikit-learn
