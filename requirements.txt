@@ -1,0 +1,31 @@
+
+# Data
+pandas
+numpy
+pyarrow          # parquet read/write
+openpyxl         # read the NLDC .xlsx files
+requests         # weather API calls
+
+# Models
+scikit-learn
+xgboost
+prophet
+statsmodels      # SARIMA (SARIMAX)
+
+# Features / evaluation
+holidays         # Indian holiday calendar
+shap             # XGBoost explainability
+matplotlib
+
+# Storage
+joblib
+boto3            # S3
+python-dotenv    # .env credentials
+
+# App
+streamlit
+plotly           # interactive forecast charts
+
+# Optional
+mapie            # conformal intervals (or write them manually)
+jupyter          # notebooks for exploration
