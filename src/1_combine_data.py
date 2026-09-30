@@ -1,16 +1,25 @@
-import pandas as pd
-import os
-import sys
+"""
+this script combines all the raw NLDC electricity demand data files into a single DataFrame,
+removes duplicates, and
+saves the combined data to a parquet file.
+"""
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
+import sys
+from pathlib import Path
+
+import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from config import RAW_DATA_DIR, COMBINED_DATA_DIR
 
 v2_data = "January 2024- June 2025.xlsx"
 
 all_dfs = []
 
-for file in os.listdir(RAW_DATA_DIR):
-    if not file.endswith(".xlsx"):
+for file in sorted(p.name for p in RAW_DATA_DIR.glob("*.xlsx")):
+    if file.startswith("~$"):
         continue
 
     if file == v2_data:
