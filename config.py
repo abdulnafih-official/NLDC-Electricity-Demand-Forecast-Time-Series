@@ -22,3 +22,14 @@ XGB_PARAMS = {
   "colsample_bytree": 0.8,
   "random_state": 42,
 }
+
+PROPHET_PARAMS = {
+    "weekly_seasonality": True,
+    "yearly_seasonality": True,
+    "daily_seasonality": False,
+    "interval_width": 0.90,
+    "changepoint_prior_scale": 0.0005,
+    "seasonality_prior_scale": 1,
+    "holidays_prior_scale": 10,
+    "seasonality_mode": "additive",
+}
