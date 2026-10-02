@@ -13,6 +13,7 @@ CALIBRATION_PATH = MODELS_DIR / "calibration.json"
 COMBINED_DATA_DIR = PROCESSED_DATA_DIR / "combined"
 CLEANED_DATA_DIR = PROCESSED_DATA_DIR / "cleaned"
 
+
 XGB_PARAMS = {
   "max_depth": 1,
   "learning_rate": 0.05,
@@ -33,3 +34,14 @@ PROPHET_PARAMS = {
     "holidays_prior_scale": 10,
     "seasonality_mode": "additive",
 }
+
+DAILY_SERIES_PATH = FEATURES_DATA_DIR / "series.parquet"
+SARIMA_INTERVAL_ALPHA = 0.10
+SARIMA_MODEL_PATH = MODELS_DIR / "sarima.joblib"
+TRAIN_END = "2023-12-31"
+CALIB_END = "2024-12-31"
+
+SARIMA_PARAMS = {
+  "order": (1, 0, 0),
+  "seasonal_order": (1, 1, 1, 7)
+  }
