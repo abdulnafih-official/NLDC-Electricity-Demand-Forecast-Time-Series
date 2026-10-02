@@ -12,13 +12,17 @@ from config import FEATURES_DATA_DIR, MODELS_DIR, PROPHET_PARAMS  # params chose
 
 logging.getLogger("cmdstanpy").setLevel(logging.WARNING)
 
-train = pd.read_parquet(FEATURES_DATA_DIR / "series_train.parquet")[["ds", "y"]]
+# Final fit on train + calib: Prophet needs no calib for intervals, params are already fixed
+fit_df = pd.concat([
+    pd.read_parquet(FEATURES_DATA_DIR / "series_train.parquet")[["ds", "y"]],
+    pd.read_parquet(FEATURES_DATA_DIR / "series_calib.parquet")[["ds", "y"]],
+]).sort_values("ds").reset_index(drop=True)
 holidays_df = pd.read_parquet(FEATURES_DATA_DIR / "prophet_holidays.parquet")
 
-model = Prophet(**PROPHET_PARAMS, holidays=holidays_df).fit(train)
+model = Prophet(**PROPHET_PARAMS, holidays=holidays_df).fit(fit_df)
 
 # Native Prophet JSON: safer across versions than a pickle
 MODELS_DIR.mkdir(parents=True, exist_ok=True)
 with open(MODELS_DIR / "prophet.json", "w") as f:
     f.write(model_to_json(model))
-print("saved:", MODELS_DIR / "prophet.json", "| rows:", len(train))
+print("saved:", MODELS_DIR / "prophet.json", "| rows:", len(fit_df))
