@@ -35,13 +35,10 @@ PROPHET_PARAMS = {
     "seasonality_mode": "additive",
 }
 
-DAILY_SERIES_PATH = FEATURES_DATA_DIR / "series.parquet"
-SARIMA_INTERVAL_ALPHA = 0.10
-SARIMA_MODEL_PATH = MODELS_DIR / "sarima.joblib"
-TRAIN_END = "2023-12-31"
-CALIB_END = "2024-12-31"
+SERIES_TRAIN_PATH = FEATURES_DATA_DIR / "series_train.parquet"
+SERIES_CALIB_PATH = FEATURES_DATA_DIR / "series_calib.parquet"
+SERIES_TEST_PATH = FEATURES_DATA_DIR / "series_test.parquet"
 
-SARIMA_PARAMS = {
-  "order": (1, 0, 0),
-  "seasonal_order": (1, 1, 1, 7)
-  }
+SARIMA_PARAMS = {"order": (1, 0, 0), "seasonal_order": (1, 1, 0, 7)} 
+SARIMA_FOURIER_K = 4                                                  
+SARIMA_INTERVAL_ALPHA = 0.10
