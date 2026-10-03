@@ -1,4 +1,9 @@
-# src/6_Prophet.py
+"""
+This script trains a Prophet model on the features dataset and saves the fitted model to disk.
+The model parameters are defined in the config.py file,
+which is generated from the hyperparameter tuning notebook (notebooks/prophet_tuning.ipynb).
+model is saved in JSON format at models/prophet.json, which can be loaded later for inference or further evaluation.
+"""
 import sys
 import logging
 from pathlib import Path

@@ -1,4 +1,6 @@
-"""Shared by the tuning notebook, 7_Sarima.py and the later prediction function."""
+"""
+Shared by the tuning notebook, 7_Sarima.py and the later prediction function.
+"""
 import numpy as np
 import pandas as pd
 

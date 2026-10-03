@@ -1,5 +1,9 @@
-"""SARIMA (+ trend and yearly Fourier exog) with conformal intervals from calibration residuals.
-Final model fits on train+calib, is evaluated once on test, and is saved to models/sarima.joblib."""
+"""
+This script trains a SARIMA model on the features dataset and saves the fitted model to disk.
+The model parameters are defined in the config.py file,
+which is generated from the hyperparameter tuning notebook (notebooks/sarima_tuning.ipynb).
+model is saved in joblib format at models/sarima.joblib, which can be loaded later for inference or further evaluation.
+"""
 import json
 import sys
 from pathlib import Path

@@ -1,4 +1,11 @@
 # src/5_XGBoost.py
+
+"""
+This script trains an XGBoost model on the features dataset and saves the fitted model to disk.
+The model parameters are defined in the config.py file,
+which is generated from the hyperparameter tuning notebook (notebooks/xgb_tuning.ipynb).
+model is saved in JSON format at models/xgb.json, which can be loaded later for inference or further evaluation.
+"""
 import sys
 from pathlib import Path
 
