@@ -33,7 +33,7 @@ hol_df["is_festival"] = hol_df["name"].str.contains("|".join(FESTIVALS), case=Fa
 # verify festival dates against known years
 print(hol_df[hol_df.is_festival].sort_values("date")[["date", "name"]].to_string())
 
-d = df.copy()
+d = df[["ds", "y"]].copy()
 d["is_holiday"] = d.ds.isin(set(hol_df["date"])).astype(int)
 d["is_festival"] = d.ds.isin(set(hol_df.loc[hol_df.is_festival, "date"])).astype(int)
 
