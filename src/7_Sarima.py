@@ -61,7 +61,7 @@ metrics = {
 }
 print(json.dumps(metrics, indent=2))
 
-res.remove_data()                      # strip training data, smaller file
+#res.remove_data()                      # strip training data, smaller file
 SARIMA_MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
 joblib.dump({
     "model": res,
