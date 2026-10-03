@@ -23,6 +23,8 @@ train, calib, test = load_splits()
 full = pd.concat([train, calib, test])
 y, N, T0 = full.values, len(full), full.index[0]
 train_end, fit_end, test_end = train.index[-1], calib.index[-1], test.index[-1]
+ORIGIN = {"prophet": fit_end, "sarima": fit_end, "xgboost": test_end}  # last date of data each forecast starts from
+REASON = {"prophet": "trend extrapolation errors", "sarima": "recursive errors", "xgboost": "recursive errors"}
 
 hol = holidays.India(years=range(T0.year - 1, END.year + 2))
 HOL = set(pd.to_datetime(list(hol.keys())))
@@ -45,8 +47,11 @@ def warnings_for(model, seg, h):
         w.append("Interval is calibrated for 1-day-ahead; recursive forecasts cover far less than 90%.")
     if h > 2 * rec:
         w.append(f"Horizon {h}d is more than twice the recommended {rec}d: indicative only.")
-    elif h > rec:
-        w.append(f"Horizon {h}d exceeds the recommended {rec}d: accuracy drops.")
+    if h > rec:
+        origin = ORIGIN[model]
+        w.append(f"Model is trained with data till {origin:%d %b %Y}. The selected date is {h - rec} days beyond "
+                 f"the recommended date ({origin + pd.Timedelta(days=rec):%d %b %Y}), "
+                 f"so the prediction will be inaccurate due to {REASON[model]}.")
     return w
 
 
