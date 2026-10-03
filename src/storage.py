@@ -74,3 +74,8 @@ def load_json(filename: str, backend: str | None = None) -> dict:
     """e.g. load_json("calibration.json")."""
     with open(_path(filename, backend)) as f:
         return json.load(f)
+    
+def load_table(filename: str, backend: str | None = None):
+    """e.g. load_table("lookup.parquet")."""
+    import pandas as pd
+    return pd.read_parquet(_path(filename, backend))
