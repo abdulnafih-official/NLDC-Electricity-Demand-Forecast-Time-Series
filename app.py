@@ -63,3 +63,21 @@ a = w.dropna(subset=["actual"])
 if not a.empty:
     fig.add_trace(go.Scatter(x=a.ds, y=a.actual, name="Actual", line=dict(color="black")))
 fig.add_trace(go.Scatter(x=[ds], y=[r["point"]], mode="markers", name="Selected date",
+                         marker=dict(size=10, color="red")))
+fig.update_layout(yaxis_title="MW", margin=dict(t=20), legend=dict(orientation="h"))
+st.plotly_chart(fig)
+
+# metrics
+st.subheader("Accuracy on the test set (2025)")
+st.caption("Only test-set dates are real out-of-sample forecasts. Train and calibration dates are in-sample.")
+try:
+    m = get_metrics()
+    short = m[(m.track == "short") & (m.horizon == "1-7")]
+    long_ = m[m.track == "long"]
+    long_ = long_[long_.horizon == long_.horizon.iloc[-1]]
+    st.markdown("**Short term: 1-7 days ahead**")
+    st.dataframe(short.drop(columns=["track", "horizon"]), hide_index=True)
+    st.markdown("**Long term: fixed origin 2024-12-31, whole test period**")
+    st.dataframe(long_.drop(columns=["track", "horizon"]), hide_index=True)
+except FileNotFoundError:
+    st.info("artifacts/metrics.csv not found.")
