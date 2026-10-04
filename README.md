@@ -163,7 +163,7 @@ The app reads a precomputed `lookup.parquet` and never touches raw data. Storage
 
 ## Limitations and next steps
 
-- No weather or macro features; Since
+- No weather or macro features. 
 - The test set is short (175 days, one half-year), so rankings carry uncertainty.
 - XGBoost uses recursive forecasting and is trained without the 2024 data; a direct multi-horizon model, refit on train + calibration, is the obvious next step.
 - XGBoost long-horizon intervals are under-covered; horizon-aware or adaptive conformal intervals would fix this.
