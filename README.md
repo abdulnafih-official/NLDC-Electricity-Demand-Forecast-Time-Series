@@ -2,7 +2,7 @@
 
 Forecasting India's daily peak electricity demand (MW) from NLDC data using **XGBoost, Prophet and SARIMA**, with **split-conformal 90% prediction intervals**, honest baselines, and a Streamlit app.
 
-**[Live demo → `<STREAMLIT_APP_URL>`](<https://nldc-electricity-demand-forecast-time-series.streamlit.app/>)**
+**[Live demo](<https://nldc-electricity-demand-forecast-time-series.streamlit.app/>)**
 
 ![App screenshot](<PATH_OR_URL_TO_SCREENSHOT>)
 
