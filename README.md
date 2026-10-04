@@ -39,7 +39,6 @@ Full per-horizon results: [`artifacts/metrics.csv`](artifacts/metrics.csv). Test
 - **SARIMA** is best for 1–7 days; **Prophet** is best at long horizons, but its coverage falls to 0.58 for days 91–175.
 - **XGBoost does not beat simple baselines here.** It trails persistence at 1–7 days and seasonal-naive at long horizons. It is trained on the train split only (no 2024 data), uses shallow trees, and recursive forecasting compounds error.
 - **Interval coverage degrades with horizon.** XGBoost intervals are calibrated for 1-day-ahead only, so long-horizon coverage is well below the 90% target (0.47–0.70). The app surfaces warnings for this.
-- <!-- TODO: add bootstrap CIs on MAE; with only 175 test days, small gaps between models may be noise. -->
 
 ---
 
@@ -47,13 +46,15 @@ Full per-horizon results: [`artifacts/metrics.csv`](artifacts/metrics.csv). Test
 
 | Item | Detail |
 |---|---|
-| Source | NLDC / Grid-India demand reports: `<DATA_SOURCE_URL>` |
-| Coverage | `<START_DATE>` to `<END_DATE>`, 2021-09-01 through mid-2025 in the splits below |
+| Source | NLDC / Grid-India demand reports: `<https://data.mendeley.com/datasets/y58jknpgs8/2>` |
+| Coverage | `<Sept 2021>` to `<June 2025>`   |
 | Raw format | Excel files in two layouts: older monthly files (`Sheet1`, column `NLDC_DEMAND\|P`) and a newer file (`Report` sheet, column `Demand (MW)`) |
 | Sampling | Mixed resolutions across files; everything is resampled to hourly means |
 | Target | **Daily peak = max of the 24 hourly means** (this slightly understates the instantaneous peak) |
 | Cleaning | Duplicate timestamps dropped; gaps of ≤ 2 days linearly interpolated; longer gaps left missing; missing/partial/interpolated days flagged |
-| Not committed | `data/` and `models/` are git-ignored. Download raw files to `data/raw/` (`<DATA_DOWNLOAD_INSTRUCTIONS>`) |
+| Not committed | `data/` and `models/` are git-ignored. Download raw files to `data/raw/` |
+|Credits: Mukherjee, Debanjan; Kalita, Karuna; Kumar, Subhash (2025), “Electricity Demand, Solar and Wind Generation Data (September 2021- June 2025) of India at 1-hour interval”, Mendeley Data, V2, doi: 10.17632/y58jknpgs8.2|
+
 
 **Splits (chronological, no shuffling)**
 
