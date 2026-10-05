@@ -46,21 +46,22 @@ with st.expander("About this project", expanded=False):
     st.subheader("What I found")
     st.markdown(
         """
-I tested on 2025 data, two ways: forecasting **1 to 7 days ahead** and forecasting
+I tested on 175 days of 2025 data, two ways: forecasting **1 to 7 days ahead** and forecasting
 **up to 175 days ahead**. No single model won both.
 
-- **Next 7 days:** SARIMA was best, with a MAPE of 3.27% against 3.57% for
-  "same as yesterday". For the next day alone it reached 1.87% against 2.34%.
+- **Next 7 days:** SARIMA was best, with a MAPE of 2.80% against 3.57% for
+  "same as yesterday". For the next day alone it reached 1.65% against 2.34%.
   XGBoost (3.76%) did not beat "same as yesterday" overall, and its error grew with
   the horizon.
-- **Up to 175 days(~6 months):** Prophet was best with a MAPE of 3.99%, against 5.34% for
-  "same day last year". SARIMA was close at 4.15%. XGBoost (7.65%) was worse than
+- **Up to 175 days (~6 months):** SARIMA was best with a MAPE of 3.87%, against 5.34% for
+  "same day last year". Prophet was essentially tied at 3.99%: it is better for days 1-90,
+  while SARIMA is better for days 91-175. XGBoost (7.65%) was worse than
   the naive baseline, because it depends on recent values that are not available
   that far ahead.
-- **Intervals:** the target is 90% coverage. Short-term, SARIMA hit 86% and XGBoost 85%.
-  Long-term, Prophet reached only 79% overall and just 58% on days 91-175 (about
-  April to June 2025), when demand ran above what the model expected. The models
-  have no weather input, so they miss extreme-heat periods.
+- **Intervals:** the target is 90% coverage. Short-term, SARIMA hit 92% and XGBoost 85%.
+  Long-term, SARIMA held 90% overall, while Prophet reached only 78% overall and just 56% on
+  days 91-175 (about April to June 2025), when demand ran above what the model expected.
+  The models have no weather input, so they miss extreme-heat periods.
 """
     )
 
@@ -81,7 +82,7 @@ I tested on 2025 data, two ways: forecasting **1 to 7 days ahead** and forecasti
     st.markdown(
         """
 - [GitHub](https://github.com/abdulnafih-official)
-- [LinkedIn]( www.linkedin.com/in/abdulnafih0001/)
+- [LinkedIn](https://www.linkedin.com/in/abdulnafih0001/)
 - [Email](mailto:abdulnafih.official@gmail.com)
 """
     )
