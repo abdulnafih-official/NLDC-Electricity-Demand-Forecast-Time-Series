@@ -178,4 +178,4 @@ The app reads a precomputed `lookup.parquet` and never touches raw data. Storage
 ## Author
 
 **Abdul Nafih**
-[GitHub](https://github.com/abdulnafih-official) · [LinkedIn](www.linkedin.com/in/abdulnafih0001/) · [`Email`](mailto:abdulnafih.official@gmail.com).
+[GitHub](https://github.com/abdulnafih-official) · [LinkedIn](www.linkedin.com/in/abdulnafih0001/) · [Email](mailto:abdulnafih.official@gmail.com).
