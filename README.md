@@ -46,7 +46,7 @@ Full per-horizon results: [`artifacts/metrics.csv`](artifacts/metrics.csv). Test
 
 | Item | Detail |
 |---|---|
-| Source | NLDC / Grid-India demand reports: `<https://data.mendeley.com/datasets/y58jknpgs8/2>` |
+| Source | NLDC / Grid-India demand reports: [`Link`](https://data.mendeley.com/datasets/y58jknpgs8/2) |
 | Coverage | `Sept 2021` to `June 2025`   |
 | Raw format | Excel files in two layouts: older monthly files (`Sheet1`, column `NLDC_DEMAND\|P`) and a newer file (`Report` sheet, column `Demand (MW)`) |
 | Sampling | Mixed resolutions across files; everything is resampled to hourly means |
