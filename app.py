@@ -77,7 +77,7 @@ I tested on 2025 data, two ways: forecasting **1 to 7 days ahead** and forecasti
 """
     )
 
-    st.subheader("Connect")
+    st.subheader("Let's Connect")
     st.markdown(
         """
 - [GitHub](https://github.com/abdulnafih-official)
