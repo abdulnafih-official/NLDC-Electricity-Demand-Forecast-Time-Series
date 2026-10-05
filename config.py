@@ -39,6 +39,6 @@ SERIES_TRAIN_PATH = FEATURES_DATA_DIR / "series_train.parquet"
 SERIES_CALIB_PATH = FEATURES_DATA_DIR / "series_calib.parquet"
 SERIES_TEST_PATH = FEATURES_DATA_DIR / "series_test.parquet"
 
-SARIMA_PARAMS = {"order": (1, 0, 0), "seasonal_order": (1, 1, 0, 7)} 
-SARIMA_FOURIER_K = 4                                                  
+SARIMA_PARAMS = {"order": (2, 0, 1), "seasonal_order": (0, 1, 1, 7)}
+SARIMA_FOURIER_K = 6                                                
 SARIMA_INTERVAL_ALPHA = 0.10
