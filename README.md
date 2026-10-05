@@ -47,13 +47,13 @@ Full per-horizon results: [`artifacts/metrics.csv`](artifacts/metrics.csv). Test
 | Item | Detail |
 |---|---|
 | Source | NLDC / Grid-India demand reports: `<https://data.mendeley.com/datasets/y58jknpgs8/2>` |
-| Coverage | `<Sept 2021>` to `<June 2025>`   |
+| Coverage | `Sept 2021` to `June 2025`   |
 | Raw format | Excel files in two layouts: older monthly files (`Sheet1`, column `NLDC_DEMAND\|P`) and a newer file (`Report` sheet, column `Demand (MW)`) |
 | Sampling | Mixed resolutions across files; everything is resampled to hourly means |
 | Target | **Daily peak = max of the 24 hourly means** (this slightly understates the instantaneous peak) |
 | Cleaning | Duplicate timestamps dropped; gaps of ≤ 2 days linearly interpolated; longer gaps left missing; missing/partial/interpolated days flagged |
 | Not committed | `data/` and `models/` are git-ignored. Download raw files to `data/raw/` |
-|Credits: Mukherjee, Debanjan; Kalita, Karuna; Kumar, Subhash (2025), “Electricity Demand, Solar and Wind Generation Data (September 2021- June 2025) of India at 1-hour interval”, Mendeley Data, V2, doi: 10.17632/y58jknpgs8.2|
+|Credits |Mukherjee, Debanjan; Kalita, Karuna; Kumar, Subhash (2025), “Electricity Demand, Solar and Wind Generation Data (September 2021- June 2025) of India at 1-hour interval”, Mendeley Data, V2, doi: 10.17632/y58jknpgs8.2|
 
 
 **Splits (chronological, no shuffling)**
