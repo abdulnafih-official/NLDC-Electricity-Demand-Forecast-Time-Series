@@ -16,19 +16,19 @@ Held-out test set: **175 days (2025-01-01 onward)**. Models were tuned on train/
 
 | Model | MAE (MW) | MAPE (%) | 90% coverage | Avg interval width (MW) |
 |---|---:|---:|---:|---:|
-| **SARIMA** | **7,161** | **3.27** | 0.86 | 27,151 |
+| **SARIMA** | **6,120** | **2.80** | 0.92 | 26,378 |
 | Persistence (yesterday) | 7,837 | 3.57 | n/a | n/a |
 | XGBoost (recursive) | 8,417 | 3.76 | 0.85 | 27,652 |
 | Last week (same weekday) | 8,799 | 3.99 | n/a | n/a |
 
-At 1 day ahead: SARIMA 4,087 MW (1.87%), XGBoost 4,201 MW (1.90%), persistence 5,110 MW (2.34%).
+At 1 day ahead: SARIMA 3,586 MW (1.65%), XGBoost 4,201 MW (1.90%), persistence 5,110 MW (2.34%).
 
 ### Long term: up to 175 days ahead (fixed origin, 2024-12-31)
 
 | Model | MAE (MW) | MAPE (%) | 90% coverage | Avg interval width (MW) |
 |---|---:|---:|---:|---:|
-| **Prophet** | **8,573** | **3.99** | 0.79 | 29,556 |
-| SARIMA | 9,169 | 4.15 | 0.98 | 44,022 |
+| **SARIMA** | **8,453** | **3.87** | 0.90 | 36,942 |
+| Prophet | 8,573 | 3.99 | 0.78 | 29,487 |
 | Seasonal naive (364 d) | 11,811 | 5.34 | n/a | n/a |
 | XGBoost (recursive) | 17,255 | 7.65 | 0.70 | 44,988 |
 
@@ -36,9 +36,9 @@ Full per-horizon results: [`artifacts/metrics.csv`](artifacts/metrics.csv). Test
 
 ### Takeaways
 
-- **SARIMA** is best for 1–7 days; **Prophet** is best at long horizons, but its coverage falls to 0.58 for days 91–175.
+- **SARIMA** is best for 1–7 days and, narrowly, over the full 175-day horizon (8,453 vs 8,573 MW, essentially a tie with Prophet given the short test set). The two split by horizon: **Prophet** is far better for days 1–90 (MAE 3,641 / 4,740 MW vs SARIMA's 6,195 / 6,861 MW for days 1–30 / 31–90), while **SARIMA** is better for days 91–175 (10,373 vs 13,019 MW). Prophet's coverage falls to 0.56 for days 91–175, while SARIMA holds 0.81.
 - **XGBoost does not beat simple baselines here.** It trails persistence at 1–7 days and seasonal-naive at long horizons. It is trained on the train split only (no 2024 data), uses shallow trees, and recursive forecasting compounds error.
-- **Interval coverage degrades with horizon.** XGBoost intervals are calibrated for 1-day-ahead only, so long-horizon coverage is well below the 90% target (0.47–0.70). The app surfaces warnings for this.
+- **Interval coverage degrades with horizon.** XGBoost intervals are calibrated for 1-day-ahead only, so long-horizon coverage is well below the 90% target (0.47 for days 31–90, 0.70 overall). The app surfaces warnings for this.
 
 ---
 
@@ -94,8 +94,7 @@ data/raw/*.xlsx
 **Models and tuning**
 - **XGBoost:** grid search with 4-fold walk-forward `TimeSeriesSplit` on train only (best CV MAE ≈ 4,715 ± 542 MW). Shallow trees (`max_depth=1`).
 - **Prophet:** grid over changepoint/seasonality/holiday priors, scored on the calibration year (MAE 6,950 MW vs 15,441 MW for seasonal-naive).
-- **SARIMA:** weekly seasonal SARIMAX with a linear trend and yearly Fourier terms; grid over (p,q,P,Q) and Fourier order, scored on the calibration year.
-- <!-- TODO: `config.py` has SARIMA_PARAMS (1,0,0)(1,1,0,7), K=4, but notebooks/sarima_tuning.ipynb selected (2,0,1)(0,1,1,7), K=6. Reconcile, re-run 7_Sarima.py and 8_Evaluate.py, then update the tables above. -->
+- **SARIMA:** weekly seasonal SARIMAX `(2,0,1)(0,1,1,7)` with a linear trend and yearly Fourier terms (K=6); grid over (p,q,P,Q) and Fourier order, scored on the calibration year.
 
 **Prediction intervals**
 - Split conformal with finite-sample correction at α = 0.10. Absolute residuals on the calibration year give the interval half-width.
